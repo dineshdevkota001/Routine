@@ -23,7 +23,7 @@ const BaseLayout = () => (
 </nav>  
 
     <div className="content">
-      <Route path="/" exact component={DepartmentsList} />
+    <Route path="/" exact component={DepartmentsList} />
       <Route path="/customer/:pk"  component={CustomerCreateUpdate: DepartmentCreateUpdate} />
       <Route path="/customer/" exact component={CustomerCreateUpdate: DepartmentCreateUpdate} />
 
