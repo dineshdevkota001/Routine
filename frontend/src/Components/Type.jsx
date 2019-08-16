@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Type extends Component {
   constructor() {
     super();
-    state = {};
+    this.state = {};
   }
   render() {
     return (

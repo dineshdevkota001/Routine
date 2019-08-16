@@ -1,7 +1,9 @@
-import React from 'react';
-import './App.css';
-import Period from './Components/Period'
-import Navigation from './Components/Navigation'
+import React from "react";
+import "./App.css";
+// import Period from "./Components/Period";
+import Body from "./Components/Body"
+import Navigation from "./Components/Navigation";
+// import Daysnav from "./Components/Daysnav"
 
 function App() {
   return ( <
@@ -11,10 +13,10 @@ function App() {
     <
     Navigation / >
     <
-    Period / >
+    Body / >
     <
-    /div> <
-    /React.Fragment>
+    /div>{" "} < /
+    React.Fragment >
   );
 }
 export default App;
