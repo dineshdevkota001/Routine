@@ -3,11 +3,10 @@ import React, { Component } from 'react';
 export default class Teacher extends Component {
     constructor(props) {
         super(props);
-        this.state = {nTeach : 1
-        teachers : []};
+        this.state = {nTeach : 1};
     }
-    renderTeacher = (id) => {
-        // return <input label = "teacher" type="text"/>let card = [];
+    renderTeacher = () => {
+        // return let card = [];
     }
 
     handleClick = () => {
@@ -15,11 +14,11 @@ export default class Teacher extends Component {
         this.setState({nTeach : temp});
     }
     render() {
-        console.log(this.nTeach)
+        console.log(this.state.nTeach)
         var i = 0;
         return (
             <div>
-                {this.renderTeacher(2)}
+                <input label = "teacher" type="text"/>
                 <button onClick = {this.handleClick.bind(this)}>add Teacher</button>
             </div>
         );
