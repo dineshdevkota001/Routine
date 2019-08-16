@@ -28,7 +28,7 @@ export default class Period extends Component {
         return (
             <div>
                 <p>my name is diensh</p>
-                {getTeacher()}
+                {this.getTeacher()}
             </div>
         );
     }
