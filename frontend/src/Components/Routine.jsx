@@ -19,8 +19,8 @@ export default class Routine extends Component {
   }
 
   handleDayChange = selection => {
+    console.log(selection);
     this.setState({ day: selection });
-    console.log(this.state.day);
   };
 
   renderDay = () => {

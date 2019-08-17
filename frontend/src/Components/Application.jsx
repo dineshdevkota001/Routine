@@ -17,7 +17,7 @@ export default class Application extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navigation pageHandler={this.onPageChange} page={this.state.page} />
+        <Navigation className="shadow-lg" pageHandler={this.onPageChange} page={this.state.page} />
         {this.state.page === "Home" && <Routine />}
       </React.Fragment>
     );
