@@ -3,25 +3,21 @@ import React, { Component } from "react";
 export default class Daysnav extends Component {
   constructor(props) {
     super(props);
-    this.days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday"
-    ];
-    this.state = { day: 1 };
+    this.state = {
+      days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    };
   }
+
   handleDays = selection => {
-    this.setState({ day: selection });
+    this.props.handleDayChange(selection);
   };
+
   renderDays = () => {
-    console.log(this.state.day);
     return (
       <div name="days" className="row Navbar">
-        {this.days.map(day => (
+        {this.state.days.map(day => (
           <ul
+            className="Navbar-items"
             onClick={() => {
               this.handleDays(day);
             }}

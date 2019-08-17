@@ -5,8 +5,14 @@ export default class Subject extends Component {
   render() {
     return (
       <React.Fragment>
-        <div>
-          Subject Name: <input type="text" />
+        <div className="input-group m-2">
+          <label
+            htmlFor="subjectName"
+            className="input-group-prepend input-group-text"
+          >
+            Subject Name
+          </label>
+          <input type="text" className="form-control" id="subjectName" />
         </div>
       </React.Fragment>
     );

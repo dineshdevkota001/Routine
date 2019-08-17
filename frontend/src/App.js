@@ -1,22 +1,14 @@
 import React from "react";
 import "./App.css";
-// import Period from "./Components/Period";
-import Body from "./Components/Body"
-import Navigation from "./Components/Navigation";
-// import Daysnav from "./Components/Daysnav"
+import Application from "./Components/Application";
 
 function App() {
-  return ( <
-    React.Fragment >
-    <
-    div className = "App" >
-    <
-    Navigation / >
-    <
-    Body / >
-    <
-    /div>{" "} < /
-    React.Fragment >
+  return (
+    <React.Fragment>
+      <div className="App">
+        <Application />
+      </div>
+    </React.Fragment>
   );
 }
 export default App;

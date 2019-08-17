@@ -8,9 +8,11 @@ export default class Period extends Component {
   render() {
     return (
       <React.Fragment>
-        <Subject />
-        <Teacher />
-        <Type />
+        <div className="container rounded m-2">
+          <Subject />
+          <Teacher />
+          <Type />
+        </div>
       </React.Fragment>
     );
   }

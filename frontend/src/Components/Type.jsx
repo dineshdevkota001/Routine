@@ -8,10 +8,16 @@ export default class Type extends Component {
   render() {
     return (
       <React.Fragment>
-        <select name="SubjectType" id="subtype">
-          <option value="Lecture">Lecture</option>
-          <option value="Practical">Practical</option>
-          <option value="Theory">Theory</option>
+        <select className="dropdown-menu" name="SubjectType" id="subtype">
+          <option className="dropdown-item" value="Lecture" href="#!">
+            Lecture
+          </option>
+          <option className="dropdown-item" value="Practical" href="#!">
+            Practical
+          </option>
+          <option className="dropdown-item" value="Theory" href="#!">
+            Theory
+          </option>
         </select>
       </React.Fragment>
     );

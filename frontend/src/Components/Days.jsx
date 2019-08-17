@@ -1,20 +1,13 @@
 import React, { Component } from "react";
-import Daysnav from "./Daysnav";
 import Period from "./Period";
 
-export default class Body extends Component {
+export default class Days extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      day: "Sunday",
       nPeriods: 1
     };
   }
-
-  handleDayChange = selection => {
-    this.setState({ day: selection });
-  };
-
   handleAddition = () => {
     if (this.state.nPeriods < 6)
       this.setState({ nPeriods: this.state.nPeriods + 1 });
@@ -23,13 +16,7 @@ export default class Body extends Component {
   renderPeriods = () => {
     let Periods = [];
     for (let i = 0; i < this.state.nPeriods; ++i) {
-      Periods.push(
-        <Period
-          className="m-10"
-          handleDay={() => this.handleDayChange}
-          key={i}
-        />
-      );
+      Periods.push(<Period className="m-2" key={i} />);
     }
 
     return <div className="column">{Periods}</div>;
@@ -38,7 +25,6 @@ export default class Body extends Component {
   render() {
     return (
       <React.Fragment>
-        <Daysnav />
         {this.renderPeriods()}
         <br />
         <button
