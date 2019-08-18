@@ -1,26 +1,56 @@
 import React, { Component } from "react";
 import Daysnav from "./Daysnav";
-import Days from "./Days";
+import Day from "./Day";
 
 export default class Routine extends Component {
   constructor(props) {
     super(props);
     this.state = {
       day: "Sunday",
+      daynames: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      index: 0,
       days: [
-        { id: 1, name: "Sunday" },
-        { id: 2, name: "Monday" },
-        { id: 3, name: "Tuesday" },
-        { id: 4, name: "Wednesday" },
-        { id: 5, name: "Thursday" },
-        { id: 6, name: "Friday" }
+        {
+          name: "Sunday",
+          periods: [{ id: 1 }]
+        },
+        {
+          name: "Monday",
+          periods: [{ id: 1 }]
+        },
+        {
+          name: "Tuesday",
+          periods: [{ id: 1 }]
+        },
+        {
+          name: "Wednesday",
+          periods: [{ id: 1 }]
+        },
+        {
+          name: "Thursday",
+          periods: [{ id: 1 }]
+        },
+        {
+          name: "Friday",
+          periods: [{ id: 1 }]
+        }
       ]
     };
   }
 
   handleDayChange = selection => {
     console.log(selection);
-    this.setState({ day: selection });
+    this.setState({
+      day: selection,
+      index: this.state.daynames.indexOf(selection)
+    });
   };
 
   renderDay = () => {
@@ -28,17 +58,50 @@ export default class Routine extends Component {
     return (
       <div>
         {this.state.days.map(
-          one => one.name === this.state.day && <Days key={one.id} />
+          one =>
+            one.name === this.state.day && (
+              <Day
+                key={one.name}
+                periods={one.periods}
+                handleDelete={index => this.deletePeriod(index)}
+              />
+            )
         )}
       </div>
     );
+  };
+
+  deletePeriod = index => {
+    let temp = this.state.days;
+    console.log("was here " + index + this.state.index);
+    temp[this.state.index].periods.slice(index - 1, 1);
+    this.setState({ days: temp });
+  };
+
+  handleAddition = () => {
+    if (this.state.days[this.state.index].periods.length < 6) {
+      let temp = this.state.days;
+      let p = temp[this.state.index].periods;
+      temp[this.state.index].periods.push({
+        id: p[p.length - 1].id + 1
+      });
+      this.setState({ days: temp });
+    }
   };
 
   render() {
     return (
       <React.Fragment>
         <Daysnav handleDayChange={this.handleDayChange} />
-        <Days />
+        {this.renderDay()}
+        <button
+          onClick={() => {
+            this.handleAddition();
+          }}
+          className="btn btn-primary m-2"
+        >
+          Add new Period
+        </button>
       </React.Fragment>
     );
   }

@@ -13,13 +13,16 @@ export default class Teacher extends Component {
 
   handleTeacherAddition = () => {
     if (this.state.teachers.length < 3) {
-      let temp = this.state.teachers
+      let temp = this.state.teachers;
       console.log(this.state.teacherCount);
-      temp.push({ id: this.state.id, name: "" })
-      this.setState({ teacherCount: this.state.teacherCount + 1, teachers: temp, id: this.state.id + 1 })
-    }
-    else {
-      alert('Maximum Teacher Limit Reached')
+      temp.push({ id: this.state.id, name: "" });
+      this.setState({
+        teacherCount: this.state.teacherCount + 1,
+        teachers: temp,
+        id: this.state.id + 1
+      });
+    } else {
+      alert("Maximum Teacher Limit Reached");
     }
   };
 
@@ -28,14 +31,17 @@ export default class Teacher extends Component {
     console.log(index);
     converted.splice(index, 1);
     console.log(converted);
-    this.setState({ teacherCount: this.state.teachers.length - 1, teachers: converted });
+    this.setState({
+      teacherCount: this.state.teachers.length - 1,
+      teachers: converted
+    });
   };
 
   handleInput = (event, id) => {
     let present_data = this.state.teachers;
     let target = event.target;
     present_data[id].name = target.value;
-    this.setState({ teachers: present_data })
+    this.setState({ teachers: present_data });
     console.log(this.state.teachers[id].name);
   };
 
@@ -45,16 +51,20 @@ export default class Teacher extends Component {
         {this.state.teachers.map(teacher => (
           <div className="flex-grow-1" key={teacher.id}>
             <input
-              className="form-control m-1"
+              className="form-control m-1 mr-2"
               type="text"
               id="TeacherName"
               placeholder="Teacher Name"
-              onChange={(evt) => this.handleInput(evt, this.state.teachers.indexOf(teacher))}
+              onChange={evt =>
+                this.handleInput(evt, this.state.teachers.indexOf(teacher))
+              }
             />
             <button
               htmlFor="subjectName"
               className="input-group-append btn btn-danger m-1"
-              onClick={() => this.handleDelete(this.state.teachers.indexOf(teacher))}
+              onClick={() =>
+                this.handleDelete(this.state.teachers.indexOf(teacher))
+              }
             >
               Delete
             </button>
@@ -68,18 +78,14 @@ export default class Teacher extends Component {
     console.log(this.state.teacherCount);
     return (
       <React.Fragment>
-        <div className="row">
-          <label htmlFor="teacher_group" className="col-2 input-group-text m-2">
-            Teacher Name
-          </label>
+        <div className="">
           {this.renderInput()}
           <button
             onClick={this.handleTeacherAddition}
-            className="col-2 btn btn-lg btn-primary m-2"
+            className="col-2 btn btn-primary m-2"
           >
             Add teacher
-        </button>
-
+          </button>
         </div>
       </React.Fragment>
     );

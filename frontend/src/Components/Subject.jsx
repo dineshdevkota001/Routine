@@ -6,13 +6,12 @@ export default class Subject extends Component {
     return (
       <React.Fragment>
         <div className="input-group m-2">
-          <label
-            htmlFor="subjectName"
-            className="input-group-prepend input-group-text"
-          >
-            Subject Name
-          </label>
-          <input type="text" className="form-control" id="subjectName" />
+          <input
+            type="text"
+            placeholder="Subject Name"
+            className="form-control mr-4"
+            id="subjectName"
+          />
         </div>
       </React.Fragment>
     );
