@@ -15,16 +15,28 @@ export default class Day extends Component {
         className="m-2"
         key={period.id}
         index={index}
-        handleDelete={index => {
-          this.props.handleDelete(index);
+        handleDelete={(index, day) => {
+          this.props.handleDelete(index, this.props.index);
         }}
       />
     ));
 
-    return <div className="column">{Periods}</div>;
+    return <div className="d-flex flex-wrap">{Periods}</div>;
   };
 
   render() {
-    return <React.Fragment>{this.renderPeriods()}</React.Fragment>;
+    return (
+      <React.Fragment>
+        {this.renderPeriods()}
+        <button
+          onClick={() => {
+            this.props.handleAddition(this.props.index);
+          }}
+          className="btn btn-primary m-2"
+        >
+          Add new Period
+        </button>
+      </React.Fragment>
+    );
   }
 }

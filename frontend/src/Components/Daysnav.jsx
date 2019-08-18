@@ -34,6 +34,7 @@ export default class Daysnav extends Component {
   };
 
   renderDays = () => {
+    console.log("here");
     return (
       <React.Fragment>
         {this.state.days.map(day => (

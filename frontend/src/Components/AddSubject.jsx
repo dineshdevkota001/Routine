@@ -39,8 +39,8 @@ export default class AddSubject extends Component {
   renderTeacherList = () => {
     return (
       <React.Fragment>
-        {this.state.Subjects.map(teacher => (
-          <div className="m-1 row">
+        {this.state.Subjects.map((teacher, index) => (
+          <div className="m-1 row" key={index}>
             <p className="col-3"> {teacher.id} </p>
             <p className="col-6">{teacher.name}</p>{" "}
             <p className="col-3"> {teacher.short}</p>

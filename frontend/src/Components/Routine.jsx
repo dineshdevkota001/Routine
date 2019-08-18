@@ -15,31 +15,38 @@ export default class Routine extends Component {
         "Thursday",
         "Friday"
       ],
-      index: 0,
+
       days: [
         {
+          id: 1,
           name: "Sunday",
-          periods: [{ id: 1 }]
+
+          periods: []
         },
         {
+          id: 1,
           name: "Monday",
-          periods: [{ id: 1 }]
+          periods: []
         },
         {
+          id: 1,
           name: "Tuesday",
-          periods: [{ id: 1 }]
+          periods: []
         },
         {
+          id: 1,
           name: "Wednesday",
-          periods: [{ id: 1 }]
+          periods: []
         },
         {
+          id: 1,
           name: "Thursday",
-          periods: [{ id: 1 }]
+          periods: []
         },
         {
+          id: 1,
           name: "Friday",
-          periods: [{ id: 1 }]
+          periods: []
         }
       ]
     };
@@ -48,9 +55,14 @@ export default class Routine extends Component {
   handleDayChange = selection => {
     console.log(selection);
     this.setState({
-      day: selection,
-      index: this.state.daynames.indexOf(selection)
+      day: selection
     });
+  };
+
+  deletePeriod = (index, day) => {
+    let temp = this.state.days;
+    temp[day].periods.splice(index, 1);
+    this.setState({ days: temp });
   };
 
   renderDay = () => {
@@ -58,12 +70,14 @@ export default class Routine extends Component {
     return (
       <div>
         {this.state.days.map(
-          one =>
+          (one, index) =>
             one.name === this.state.day && (
               <Day
-                key={one.name}
+                key={index}
+                index={index}
                 periods={one.periods}
-                handleDelete={index => this.deletePeriod(index)}
+                handleDelete={(index, day) => this.deletePeriod(index, day)}
+                handleAddition={this.handleAddition}
               />
             )
         )}
@@ -71,19 +85,11 @@ export default class Routine extends Component {
     );
   };
 
-  deletePeriod = index => {
-    let temp = this.state.days;
-    console.log("was here " + index + this.state.index);
-    temp[this.state.index].periods.slice(index - 1, 1);
-    this.setState({ days: temp });
-  };
-
-  handleAddition = () => {
-    if (this.state.days[this.state.index].periods.length < 6) {
+  handleAddition = index => {
+    if (this.state.days[index].periods.length < 6) {
       let temp = this.state.days;
-      let p = temp[this.state.index].periods;
-      temp[this.state.index].periods.push({
-        id: p[p.length - 1].id + 1
+      temp[index].periods.push({
+        id: ++temp[index].id
       });
       this.setState({ days: temp });
     }
@@ -92,16 +98,10 @@ export default class Routine extends Component {
   render() {
     return (
       <React.Fragment>
-        <Daysnav handleDayChange={this.handleDayChange} />
+        <Daysnav
+          handleDayChange={selection => this.handleDayChange(selection)}
+        />
         {this.renderDay()}
-        <button
-          onClick={() => {
-            this.handleAddition();
-          }}
-          className="btn btn-primary m-2"
-        >
-          Add new Period
-        </button>
       </React.Fragment>
     );
   }

@@ -14,7 +14,7 @@ class Navigation extends Component {
   };
 
   getNavClasses = page => {
-    let r = " nav-item nav-link";
+    let r = " nav-item nav-link ";
     r += page === this.props.page ? "active" : null;
     return r;
   };
@@ -32,6 +32,7 @@ class Navigation extends Component {
             key={page}
           >
             {page}
+
             {page === this.props.page && (
               <span className="sr-only">(current)</span>
             )}
@@ -44,7 +45,7 @@ class Navigation extends Component {
   render() {
     return (
       <React.Fragment>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" href="#!">
             Routine Manager
           </a>
