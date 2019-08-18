@@ -96,12 +96,22 @@ export default class Routine extends Component {
   };
 
   render() {
+    var { day, daynames, days } = this.state;
     return (
       <React.Fragment>
         <Daysnav
+          key="primary"
+          day={this.state.day}
           handleDayChange={selection => this.handleDayChange(selection)}
         />
         {this.renderDay()}
+        {days[daynames.indexOf(day)].periods.length > 4 && (
+          <Daysnav
+            key="secondary"
+            day={this.state.day}
+            handleDayChange={selection => this.handleDayChange(selection)}
+          />
+        )}
       </React.Fragment>
     );
   }

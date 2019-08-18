@@ -4,37 +4,30 @@ export default class Daysnav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: "Sunday",
       days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
     };
   }
 
-  handleDays = selection => {
-    this.setState({ selected: selection });
-    this.props.handleDayChange(selection);
-  };
-
   colorDay = day => {
-    if (day === this.state.selected) {
+    if (day === this.props.day) {
       return "primary";
-    } else return "info";
+    } else return "white";
   };
 
   changePage = factor => {
-    var { selected, days } = this.state;
-    let present = days.indexOf(selected);
+    var { days } = this.state;
+    var { day } = this.props;
+    let present = days.indexOf(day);
     if (factor < 0 && present === 0) {
       return;
     } else if (factor > 0 && present === days.length - 1) {
       return;
     }
     let selection = this.state.days[present + factor];
-    this.setState({ selected: selection });
     this.props.handleDayChange(selection);
   };
 
   renderDays = () => {
-    console.log("here");
     return (
       <React.Fragment>
         {this.state.days.map(day => (
@@ -43,7 +36,7 @@ export default class Daysnav extends Component {
               className={"btn px-5 btn-" + this.colorDay(day)}
               href="#!"
               onClick={() => {
-                this.handleDays(day);
+                this.props.handleDayChange(day);
               }}
               key={day}
             >
@@ -59,7 +52,7 @@ export default class Daysnav extends Component {
     return (
       <React.Fragment>
         <nav aria-label="Page navigation example">
-          <ul className="pagination m-2 align-content-center">
+          <ul className="mt-3 pagination m-2 row">
             <li className="page-item">
               <a
                 className="page-link"
@@ -69,8 +62,8 @@ export default class Daysnav extends Component {
                   this.changePage(-1);
                 }}
               >
-                <span aria-hidden="true">&laquo;</span>
-                <span className="sr-only">Previous</span>
+                <span aria-hidden="true"> &laquo; Previous </span>
+                <span className="sr-only" />
               </a>
             </li>
             {this.renderDays()}
@@ -83,8 +76,7 @@ export default class Daysnav extends Component {
                   this.changePage(1);
                 }}
               >
-                <span aria-hidden="true">&raquo;</span>
-                <span className="sr-only">Next</span>
+                <span aria-hidden="true"> Next &raquo; </span>
               </a>
             </li>
           </ul>
