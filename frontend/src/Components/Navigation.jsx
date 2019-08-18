@@ -5,7 +5,7 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pages: ["Home", "Teachers", "Classes", "Subject"]
+      pages: ["Home", "Teachers", "Classes", "Subject", "Programs"]
     };
   }
 

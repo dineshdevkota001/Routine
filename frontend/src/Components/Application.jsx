@@ -4,6 +4,7 @@ import Routine from "./Routine";
 import AddTeacher from "./AddTeacher";
 import AddClass from "./AddClass";
 import AddSubject from "./AddSubject";
+import AddProgram from "./AddProgram";
 
 export default class Application extends Component {
   constructor() {
@@ -29,6 +30,7 @@ export default class Application extends Component {
         {this.state.page === "Teachers" && <AddTeacher />}
         {this.state.page === "Classes" && <AddClass />}
         {this.state.page === "Subject" && <AddSubject />}
+        {this.state.page === "Programs" && <AddProgram />}
       </React.Fragment>
     );
   }

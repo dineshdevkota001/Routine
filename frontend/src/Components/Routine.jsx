@@ -20,7 +20,6 @@ export default class Routine extends Component {
         {
           id: 1,
           name: "Sunday",
-
           periods: []
         },
         {

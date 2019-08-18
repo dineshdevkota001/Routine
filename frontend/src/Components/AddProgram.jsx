@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 
-export default class AddTeacher extends Component {
+export default class AddProgram extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teachers: [],
+      Programs: [],
       temp: { id: 1, name: "", short: "" }
     };
   }
 
   handleClick = () => {
     if (this.state.temp.name && this.state.temp.short) {
-      let previous = this.state.teachers;
+      let previous = this.state.Programs;
       let temp1 = this.state.temp;
       previous.push(temp1);
       this.setState({
-        teachers: previous,
+        Programs: previous,
         temp: { id: this.state.temp.id + 1, name: "", short: "" }
       });
     }
@@ -35,7 +35,7 @@ export default class AddTeacher extends Component {
   renderTeacherList = () => {
     return (
       <React.Fragment>
-        {this.state.teachers.map((teacher, index) => (
+        {this.state.Programs.map((teacher, index) => (
           <div className="m-1 row" key={index}>
             <p className="col-3"> {teacher.id} </p>
             <p className="col-6">{teacher.name}</p>{" "}
