@@ -22,27 +22,27 @@ export default class Routine extends Component {
           periods: []
         },
         {
-          id: 2,
+          id: 1,
           name: "Monday",
           periods: []
         },
         {
-          id: 3,
+          id: 1,
           name: "Tuesday",
           periods: []
         },
         {
-          id: 4,
+          id: 1,
           name: "Wednesday",
           periods: []
         },
         {
-          id: 5,
+          id: 1,
           name: "Thursday",
           periods: []
         },
         {
-          id: 6,
+          id: 1,
           name: "Friday",
           periods: []
         }
@@ -75,6 +75,12 @@ export default class Routine extends Component {
     }
   };
 
+  handleChangePeriod = (day, index, period) => {
+    let temp = this.state.days;
+    temp[day].periods[index] = period;
+    this.setState({ days: temp });
+  };
+
   deletePeriod = (index, day) => {
     let temp = this.state.days;
     temp[day].periods.splice(index, 1);
@@ -86,7 +92,6 @@ export default class Routine extends Component {
   };
 
   renderDay = () => {
-    // let { day, days } = this.state;
     return (
       <div>
         {this.state.days.map(
@@ -98,6 +103,9 @@ export default class Routine extends Component {
                 periods={one.periods}
                 handleDelete={(index, day) => this.deletePeriod(index, day)}
                 handleAddition={this.handleAddition}
+                handleChangePeriod={(day, index, period) =>
+                  this.handleChangePeriod(day, index, period)
+                }
               />
             )
         )}

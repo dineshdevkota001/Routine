@@ -24,10 +24,8 @@ export default class Period extends Component {
     this.setState({ subject: value });
   };
 
-  handleTeacher = teachers => {
-    var previous = Object.assign({}, this.state);
-    previous.teachers = teachers;
-    this.setState({ previous });
+  handleTeacher = teacher => {
+    this.setState({ teachers: teacher });
   };
 
   handleDetails = detail => {
@@ -45,7 +43,12 @@ export default class Period extends Component {
     console.log(this.state.teachers.length);
     return (
       <React.Fragment>
-        <div className="component col-6 border rounded  ">
+        <div
+          className="component col-6 border rounded"
+          onChange={(index, period) =>
+            this.props.onPeriodChange(this.props.index, this.state)
+          }
+        >
           <Subject
             handleInput={subject => this.handleSubject(subject)}
             state={this.state.subject}

@@ -39,8 +39,7 @@ class Details extends Component {
       <select
         name="Period"
         id="startPeriod"
-        className="rounded-lg col-3 m-2 p-2 "
-        onChange={evt => this.onChangePeriod(evt.target.value)}
+        className="rounded-lg col-3 m-2 p-2"
       >
         {this.period.map(period => (
           <option value={period} key={period}>

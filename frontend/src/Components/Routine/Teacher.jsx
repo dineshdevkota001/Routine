@@ -42,7 +42,7 @@ export default class Teacher extends Component {
     let target = event.target;
     present_data[id].name = target.value;
     this.setState({ teachers: present_data });
-    console.log(this.state.teachers[id].name);
+    this.props.handleInput(present_data);
   };
 
   renderInput = () => {

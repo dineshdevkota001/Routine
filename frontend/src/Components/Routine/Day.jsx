@@ -20,6 +20,9 @@ export default class Day extends Component {
         handleDelete={(index, day) => {
           this.props.handleDelete(index, this.props.index);
         }}
+        onPeriodChange={(index, period) =>
+          this.props.handleChangePeriod(this.state.day, index, period)
+        }
       />
     ));
 
