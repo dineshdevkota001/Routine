@@ -39,7 +39,7 @@ class Details extends Component {
       <select
         name="Period"
         id="startPeriod"
-        className="col-3 m-2 p-2 rounded-lg bg-light"
+        className="rounded-lg col-3 m-2 p-2 "
         onChange={evt => this.onChangePeriod(evt.target.value)}
       >
         {this.period.map(period => (
@@ -56,7 +56,7 @@ class Details extends Component {
       <select
         name="Period"
         id="startPeriod"
-        className="col-3 m-2 p-2 rounded-lg bg-light"
+        className="col-3 m-2 p-2 rounded-lg "
         onChange={evt => this.onChangeNop(evt.target.value)}
       >
         {this.nop.map(period => (
@@ -71,7 +71,7 @@ class Details extends Component {
   renderType = () => {
     return (
       <select
-        className="col-2 m-2 p-2 rounded-lg bg-light"
+        className="col-2 m-2 p-2 rounded-lg"
         name="SubjectType"
         id="subtype"
         onChange={evt => this.onChangeType(evt.target.value)}

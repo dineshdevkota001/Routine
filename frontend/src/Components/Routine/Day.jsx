@@ -5,7 +5,8 @@ export default class Day extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      periods: this.props.periods
+      periods: this.props.periods,
+      day: this.props.index
     };
   }
 
@@ -15,6 +16,7 @@ export default class Day extends Component {
         className="m-2"
         key={period.id}
         index={index}
+        day={this.state.day}
         handleDelete={(index, day) => {
           this.props.handleDelete(index, this.props.index);
         }}
