@@ -1,36 +1,49 @@
 import React, { Component } from "react";
 
 export default class AddProgram extends Component {
+  //  Constructor and state
   constructor(props) {
     super(props);
     this.state = {
       programs: [],
-      temp: { id: 1, name: "", short: "" }
+      temp: { id: 1, name: "", short: "", department: "ECE", nog: 2 }
     };
   }
 
+  // handle interactions
   handleClick = () => {
     if (this.state.temp.name && this.state.temp.short) {
       let previous = this.state.programs;
       let temp1 = this.state.temp;
+      temp1.id = "T" + temp1.id.toString();
       previous.push(temp1);
       this.setState({
         programs: previous,
-        temp: { id: this.state.temp.id + 1, name: "", short: "" }
+        temp: {
+          id: this.state.temp.id + 1,
+          name: "",
+          short: "",
+          department: "ECE",
+          nog: 2
+        }
       });
     }
   };
 
-  handleInput = (evt, type) => {
-    let input = evt.target.value;
+  handleInput = (input, type) => {
     let temp1 = this.state.temp;
     if (type === "name") {
       temp1.name = input;
-    } else {
+    } else if (type === "srt") {
       temp1.short = input;
+    } else if (type === "dep") {
+      temp1.department = input;
+    } else {
+      temp1.nog = parseInt(input);
     }
     this.setState({ temp: temp1 });
   };
+
   handleDelete = index => {
     let temp = this.state.programs;
     temp.splice(index, 1);
@@ -39,14 +52,17 @@ export default class AddProgram extends Component {
     });
   };
 
+  // handle rendering
   renderProgramList = () => {
     return (
       <React.Fragment>
-        {this.state.programs.map((Program, index) => (
+        {this.state.programs.map((program, index) => (
           <div className="m-1 row" key={index}>
-            <p className="col-2"> {Program.id} </p>
-            <p className="col-5">{Program.name}</p>
-            <p className="col-3"> {Program.short}</p>
+            <p className="col-1"> {program.id} </p>
+            <p className="col-4">{program.name}</p>
+            <p className="col-3"> {program.short}</p>
+            <p className="col-2"> {program.department}</p>
+            <p className="col-2"> {program.nog}</p>
             <button
               className="btn btn-danger col-2"
               onClick={index => this.handleDelete(index)}
@@ -59,33 +75,53 @@ export default class AddProgram extends Component {
     );
   };
 
+  // the original return
   render() {
     return (
       <React.Fragment>
         <div className="m-1 row">
-          <p className="col-2 component border"> ID </p>
-          <p className="col-5 component border">Program Name</p>{" "}
+          <p className="col-1 component border"> ID </p>
+          <p className="col-3 component border">Program Name</p>{" "}
           <p className="col-3 component border"> Short Form</p>
+          <p className="col-2 component border"> Department </p>
+          <p className="col-1 component border"> No of Group </p>
         </div>
+
         {this.renderProgramList()}
+
         <div name="addProgramComponents" className="row m-2">
           <input
-            className="col-6 form-control px-2 mx-2"
+            className="col-3 form-control px-2 mx-2"
             type="text"
             placeholder="Program Name"
             value={this.state.temp.name}
-            onChange={evt => this.handleInput(evt, "name")}
+            onChange={evt => this.handleInput(evt.target.value, "name")}
           />
           <input
-            className="col-4 form-control px-2 mx-2"
+            className="col-3 form-control  mx-2"
             type="text"
             placeholder="short form"
             value={this.state.temp.short}
-            onChange={evt => this.handleInput(evt, "s")}
+            onChange={evt => this.handleInput(evt.target.value, "srt")}
           />
+          <input
+            className="col-3 form-control mx-2"
+            type="text"
+            placeholder="Department"
+            value={this.state.temp.department}
+            onChange={evt => this.handleInput(evt.target.value, "dep")}
+          />
+          <input
+            className="col-1 form-control mx-2"
+            type="text"
+            placeholder="Number of Group"
+            value={this.state.temp.nog}
+            onChange={evt => this.handleInput(evt.target.value, "nog")}
+          />
+
           <button
             name="addsProgram"
-            className="btn btn-primary btn-sm px-2 col-1 mx-2"
+            className="btn btn-primary btn-sm col-1 mx-2"
             onClick={this.handleClick}
           >
             Add Program

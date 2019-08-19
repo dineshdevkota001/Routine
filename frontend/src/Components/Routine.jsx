@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Daysnav from "./Daysnav";
-import Day from "./Day";
+import Daysnav from "./Routine/Daysnav";
+import Day from "./Routine/Day";
 
 export default class Routine extends Component {
   constructor(props) {
@@ -14,27 +14,27 @@ export default class Routine extends Component {
           periods: []
         },
         {
-          id: 1,
+          id: 2,
           name: "Monday",
           periods: []
         },
         {
-          id: 1,
+          id: 3,
           name: "Tuesday",
           periods: []
         },
         {
-          id: 1,
+          id: 4,
           name: "Wednesday",
           periods: []
         },
         {
-          id: 1,
+          id: 5,
           name: "Thursday",
           periods: []
         },
         {
-          id: 1,
+          id: 6,
           name: "Friday",
           periods: []
         }

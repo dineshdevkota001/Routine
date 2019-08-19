@@ -51,7 +51,7 @@ export default class Teacher extends Component {
         {this.state.teachers.map(teacher => (
           <div className="flex-grow-1" key={teacher.id}>
             <input
-              className="form-control m-1 mr-2"
+              className="form-control m-1"
               type="text"
               id="TeacherName"
               placeholder="Teacher Name"

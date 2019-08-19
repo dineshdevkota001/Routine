@@ -8,7 +8,7 @@ export default class Home extends Component {
           src="https://picsum.photos/200"
           className="rounded-circle"
           alt="somePicture"
-          srcset=""
+          srcSet=""
         />
         <br />
         <br />

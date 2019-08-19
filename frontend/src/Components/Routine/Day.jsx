@@ -27,7 +27,6 @@ export default class Day extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.renderPeriods()}
         <button
           onClick={() => {
             this.props.handleAddition(this.props.index);
@@ -36,6 +35,17 @@ export default class Day extends Component {
         >
           Add new Period
         </button>
+        {this.renderPeriods()}
+        {this.state.periods.length >= 2 && (
+          <button
+            onClick={() => {
+              this.props.handleAddition(this.props.index);
+            }}
+            className="btn btn-primary m-2"
+          >
+            Add new Period
+          </button>
+        )}
       </React.Fragment>
     );
   }
