@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navigation from "./Navigation";
 import Routine from "./Routine";
+import Home from "./Home";
 import AddTeacher from "./AddTeacher";
 import AddClass from "./AddClass";
 import AddSubject from "./AddSubject";
@@ -26,7 +27,8 @@ export default class Application extends Component {
           pageHandler={this.onPageChange}
           page={this.state.page}
         />
-        {this.state.page === "Home" && <Routine />}
+        {this.state.page === "Home" && <Home />}
+        {this.state.page === "Routine" && <Routine />}
         {this.state.page === "Teachers" && <AddTeacher />}
         {this.state.page === "Classes" && <AddClass />}
         {this.state.page === "Subject" && <AddSubject />}

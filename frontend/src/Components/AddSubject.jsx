@@ -4,22 +4,39 @@ export default class AddSubject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Subjects: [
-        { id: 1, name: "placeholder", short: "abc" },
-        { id: 1, name: "placeholder", short: "abc" },
-        { id: 1, name: "placeholder", short: "abc" }
-      ],
-      temp: { id: 3, name: "", short: "" }
+      subjects: [],
+      temp: { id: 1, name: "", short: "" }
     };
+  }
+  addEmployee(employee) {
+    let newPeriods = this.state.days.concat([employee]);
+    localStorage.setItem("Subjects", JSON.stringify(newPeriods));
+    this.setState({
+      day: newPeriods.day,
+      days: newPeriods.days
+    });
+  }
+
+  componentDidMount() {
+    let newPeriods = localStorage.Routine;
+    if (newPeriods != undefined) {
+      this.setState({
+        days: JSON.parse(newPeriods)
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this.addEmployee(this.state);
   }
 
   handleClick = () => {
     if (this.state.temp.name && this.state.temp.short) {
-      let previous = this.state.Subjects;
+      let previous = this.state.subjects;
       let temp1 = this.state.temp;
       previous.push(temp1);
       this.setState({
-        Subjects: previous,
+        subjects: previous,
         temp: { id: this.state.temp.id + 1, name: "", short: "" }
       });
     }
@@ -35,15 +52,28 @@ export default class AddSubject extends Component {
     }
     this.setState({ temp: temp1 });
   };
+  handleDelete = index => {
+    let temp = this.state.subjects;
+    temp.splice(index, 1);
+    this.setState({
+      subjects: temp
+    });
+  };
 
-  renderTeacherList = () => {
+  renderSubjectList = () => {
     return (
       <React.Fragment>
-        {this.state.Subjects.map((teacher, index) => (
+        {this.state.subjects.map((Subject, index) => (
           <div className="m-1 row" key={index}>
-            <p className="col-3"> {teacher.id} </p>
-            <p className="col-6">{teacher.name}</p>{" "}
-            <p className="col-3"> {teacher.short}</p>
+            <p className="col-2"> {Subject.id} </p>
+            <p className="col-5">{Subject.name}</p>
+            <p className="col-3"> {Subject.short}</p>
+            <button
+              className="btn btn-danger col-2"
+              onClick={index => this.handleDelete(index)}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </React.Fragment>
@@ -54,16 +84,16 @@ export default class AddSubject extends Component {
     return (
       <React.Fragment>
         <div className="m-1 row">
-          <p className="col-3 component border"> ID </p>
-          <p className="col-6 component border">Teacher Name</p>{" "}
+          <p className="col-2 component border"> ID </p>
+          <p className="col-5 component border">Subject Name</p>{" "}
           <p className="col-3 component border"> Short Form</p>
         </div>
-        {this.renderTeacherList()}
-        <div name="addTeacherComponents" className="row m-2">
+        {this.renderSubjectList()}
+        <div name="addSubjectComponents" className="row m-2">
           <input
             className="col-6 form-control px-2 mx-2"
             type="text"
-            placeholder="teacher Name"
+            placeholder="Subject Name"
             value={this.state.temp.name}
             onChange={evt => this.handleInput(evt, "name")}
           />
@@ -75,11 +105,11 @@ export default class AddSubject extends Component {
             onChange={evt => this.handleInput(evt, "s")}
           />
           <button
-            name="addsTeacher"
+            name="addsSubject"
             className="btn btn-primary btn-sm px-2 col-1 mx-2"
             onClick={this.handleClick}
           >
-            Add teacher
+            Add Subject
           </button>
         </div>
       </React.Fragment>

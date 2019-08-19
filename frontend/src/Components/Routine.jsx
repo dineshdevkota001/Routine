@@ -7,15 +7,6 @@ export default class Routine extends Component {
     super(props);
     this.state = {
       day: "Sunday",
-      daynames: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-
       days: [
         {
           id: 1,
@@ -49,6 +40,14 @@ export default class Routine extends Component {
         }
       ]
     };
+    this.daynames = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ];
   }
 
   handleDayChange = selection => {
@@ -95,7 +94,7 @@ export default class Routine extends Component {
   };
 
   render() {
-    var { day, daynames, days } = this.state;
+    var { day, days } = this.state;
     return (
       <React.Fragment>
         <Daysnav
@@ -104,7 +103,7 @@ export default class Routine extends Component {
           handleDayChange={selection => this.handleDayChange(selection)}
         />
         {this.renderDay()}
-        {days[daynames.indexOf(day)].periods.length > 4 && (
+        {days[this.daynames.indexOf(day)].periods.length > 4 && (
           <Daysnav
             key="secondary"
             day={this.state.day}

@@ -32,14 +32,28 @@ export default class AddTeacher extends Component {
     this.setState({ temp: temp1 });
   };
 
+  handleDelete = index => {
+    let temp = this.state.teachers;
+    temp.splice(index, 1);
+    this.setState({
+      teachers: temp
+    });
+  };
+
   renderTeacherList = () => {
     return (
       <React.Fragment>
         {this.state.teachers.map((teacher, index) => (
           <div className="m-1 row" key={index}>
-            <p className="col-3"> {teacher.id} </p>
-            <p className="col-6">{teacher.name}</p>{" "}
+            <p className="col-2"> {teacher.id} </p>
+            <p className="col-5">{teacher.name}</p>
             <p className="col-3"> {teacher.short}</p>
+            <button
+              className="btn btn-danger col-2"
+              onClick={index => this.handleDelete(index)}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </React.Fragment>
@@ -50,8 +64,8 @@ export default class AddTeacher extends Component {
     return (
       <React.Fragment>
         <div className="m-1 row">
-          <p className="col-3 component border"> ID </p>
-          <p className="col-6 component border">Teacher Name</p>{" "}
+          <p className="col-2 component border"> ID </p>
+          <p className="col-5 component border">Teacher Name</p>{" "}
           <p className="col-3 component border"> Short Form</p>
         </div>
         {this.renderTeacherList()}

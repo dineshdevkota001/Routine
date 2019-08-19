@@ -4,15 +4,10 @@ export default class AddClass extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      classes: [
-        { id: 1, name: "placeholder", short: "abc" },
-        { id: 1, name: "placeholder", short: "abc" },
-        { id: 1, name: "placeholder", short: "abc" }
-      ],
-      temp: { id: 3, name: "", short: "" }
+      classes: [],
+      temp: { id: 1, name: "", short: "" }
     };
   }
-
   handleClick = () => {
     if (this.state.temp.name && this.state.temp.short) {
       let previous = this.state.classes;
@@ -36,14 +31,28 @@ export default class AddClass extends Component {
     this.setState({ temp: temp1 });
   };
 
-  renderTeacherList = () => {
+  handleDelete = index => {
+    let temp = this.state.classes;
+    temp.splice(index, 1);
+    this.setState({
+      classes: temp
+    });
+  };
+
+  renderClassList = () => {
     return (
       <React.Fragment>
-        {this.state.classes.map((teacher, index) => (
+        {this.state.classes.map((Class, index) => (
           <div className="m-1 row" key={index}>
-            <p className="col-3"> {teacher.id} </p>
-            <p className="col-6">{teacher.name}</p>{" "}
-            <p className="col-3"> {teacher.short}</p>
+            <p className="col-2"> {Class.id} </p>
+            <p className="col-5">{Class.name}</p>
+            <p className="col-3"> {Class.short}</p>
+            <button
+              className="btn btn-danger col-2"
+              onClick={index => this.handleDelete(index)}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </React.Fragment>
@@ -54,16 +63,16 @@ export default class AddClass extends Component {
     return (
       <React.Fragment>
         <div className="m-1 row">
-          <p className="col-3 component border"> ID </p>
-          <p className="col-6 component border">Teacher Name</p>{" "}
+          <p className="col-2 component border"> ID </p>
+          <p className="col-5 component border">Class Name</p>{" "}
           <p className="col-3 component border"> Short Form</p>
         </div>
-        {this.renderTeacherList()}
-        <div name="addTeacherComponents" className="row m-2">
+        {this.renderClassList()}
+        <div name="addClassComponents" className="row m-2">
           <input
             className="col-6 form-control px-2 mx-2"
             type="text"
-            placeholder="teacher Name"
+            placeholder="Class Name"
             value={this.state.temp.name}
             onChange={evt => this.handleInput(evt, "name")}
           />
@@ -75,11 +84,11 @@ export default class AddClass extends Component {
             onChange={evt => this.handleInput(evt, "s")}
           />
           <button
-            name="addsTeacher"
+            name="addsClass"
             className="btn btn-primary btn-sm px-2 col-1 mx-2"
             onClick={this.handleClick}
           >
-            Add teacher
+            Add Class
           </button>
         </div>
       </React.Fragment>

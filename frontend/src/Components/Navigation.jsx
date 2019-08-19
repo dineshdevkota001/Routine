@@ -5,7 +5,7 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pages: ["Home", "Teachers", "Classes", "Subject", "Programs"]
+      pages: ["Routine", "Teachers", "Classes", "Subject", "Programs"]
     };
   }
 
@@ -46,7 +46,11 @@ class Navigation extends Component {
     return (
       <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="#!">
+          <a
+            className="navbar-brand"
+            href="#!"
+            onClick={() => this.props.pageHandler("Home")}
+          >
             Routine Manager
           </a>
           <button

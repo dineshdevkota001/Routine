@@ -4,18 +4,18 @@ export default class AddProgram extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Programs: [],
+      programs: [],
       temp: { id: 1, name: "", short: "" }
     };
   }
 
   handleClick = () => {
     if (this.state.temp.name && this.state.temp.short) {
-      let previous = this.state.Programs;
+      let previous = this.state.programs;
       let temp1 = this.state.temp;
       previous.push(temp1);
       this.setState({
-        Programs: previous,
+        programs: previous,
         temp: { id: this.state.temp.id + 1, name: "", short: "" }
       });
     }
@@ -31,15 +31,28 @@ export default class AddProgram extends Component {
     }
     this.setState({ temp: temp1 });
   };
+  handleDelete = index => {
+    let temp = this.state.programs;
+    temp.splice(index, 1);
+    this.setState({
+      programs: temp
+    });
+  };
 
-  renderTeacherList = () => {
+  renderProgramList = () => {
     return (
       <React.Fragment>
-        {this.state.Programs.map((teacher, index) => (
+        {this.state.programs.map((Program, index) => (
           <div className="m-1 row" key={index}>
-            <p className="col-3"> {teacher.id} </p>
-            <p className="col-6">{teacher.name}</p>{" "}
-            <p className="col-3"> {teacher.short}</p>
+            <p className="col-2"> {Program.id} </p>
+            <p className="col-5">{Program.name}</p>
+            <p className="col-3"> {Program.short}</p>
+            <button
+              className="btn btn-danger col-2"
+              onClick={index => this.handleDelete(index)}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </React.Fragment>
@@ -50,16 +63,16 @@ export default class AddProgram extends Component {
     return (
       <React.Fragment>
         <div className="m-1 row">
-          <p className="col-3 component border"> ID </p>
-          <p className="col-6 component border">Teacher Name</p>{" "}
+          <p className="col-2 component border"> ID </p>
+          <p className="col-5 component border">Program Name</p>{" "}
           <p className="col-3 component border"> Short Form</p>
         </div>
-        {this.renderTeacherList()}
-        <div name="addTeacherComponents" className="row m-2">
+        {this.renderProgramList()}
+        <div name="addProgramComponents" className="row m-2">
           <input
             className="col-6 form-control px-2 mx-2"
             type="text"
-            placeholder="teacher Name"
+            placeholder="Program Name"
             value={this.state.temp.name}
             onChange={evt => this.handleInput(evt, "name")}
           />
@@ -71,11 +84,11 @@ export default class AddProgram extends Component {
             onChange={evt => this.handleInput(evt, "s")}
           />
           <button
-            name="addsTeacher"
+            name="addsProgram"
             className="btn btn-primary btn-sm px-2 col-1 mx-2"
             onClick={this.handleClick}
           >
-            Add teacher
+            Add Program
           </button>
         </div>
       </React.Fragment>
