@@ -40,7 +40,7 @@ export default class AddProgram extends Component {
           id: this.state.temp.id + 1,
           name: "",
           short: "",
-          department: "ECE",
+          department: "",
           nog: 2
         }
       });
@@ -100,7 +100,7 @@ export default class AddProgram extends Component {
           <hr/>
           <div name="addProgramComponents" className="row m-2">
             <input
-              className="col-3 form-control px-2 mx-2"
+              className="col-3 form-control px-2 mx-2  ml-4"
               type="text"
               placeholder="Program Name"
               value={this.state.temp.name}
@@ -122,7 +122,7 @@ export default class AddProgram extends Component {
             />
             <input
               className="col-1 form-control mx-2"
-              type="text"
+              type="number"
               placeholder="Number of Group"
               value={this.state.temp.nog}
               onChange={evt => this.handleInput(evt.target.value, "nog")}
@@ -140,10 +140,11 @@ export default class AddProgram extends Component {
         </div>
         <div className="m-1 row">
           <p className="col-1 component border"> ID </p>
-          <p className="col-3 component border">Program Name</p>{" "}
-          <p className="col-3 component border"> Short Form</p>
+          <p className="col-4 component border">Program Name</p>{" "}
+          <p className="col-2 component border"> Short Form</p>
           <p className="col-2 component border"> Department </p>
           <p className="col-2 component border"> No of Group </p>
+          <p className="col-1 component border"> Action </p>
         </div>
 
         {this.renderProgramList()}
