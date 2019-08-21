@@ -106,7 +106,7 @@ export default class AddSubject extends Component {
           <hr/>
           <div name="addSubjectComponents" className="row m-2">
             <input
-              className="col-4 form-control px-2 mx-2"
+              className="col-4 form-control px-2 mx-2 ml-4"
               type="text"
               placeholder="Subject Name"
               value={this.state.temp.name}
