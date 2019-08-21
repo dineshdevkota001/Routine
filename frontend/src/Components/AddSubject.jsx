@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class AddSubject extends Component {
   constructor(props) {
     super(props);
     this.state = {
       subjects: [],
-      temp: { id: 1, name: "", short: "", department: "ECE" }
+      temp: { id: 1, name: "", short: "", department: "" }
     };
   }
 
@@ -19,13 +20,20 @@ export default class AddSubject extends Component {
   }
 
   componentDidMount() {
-    // let newPeriods = localStorage.Routine;
-    // if (newPeriods !== undefined) {
-    //   this.setState({
-    //     days: JSON.parse(newPeriods)
-    //   });
-    // }
+    this.refreshList();
   }
+
+  refreshList = () => {
+    axios
+      .get("http://127.0.0.1:8000/subjects/")
+      .then(res => {
+        this.setState({
+          subjects : res.data
+        })
+      }
+      )
+      .catch(err => console.log(err));
+  };
 
   componentWillUnmount() {
     // this.addEmployee(this.state);
@@ -43,7 +51,7 @@ export default class AddSubject extends Component {
           id: this.state.temp.id + 1,
           name: "",
           short: "",
-          department: "ECE"
+          department: ""
         }
       });
     }
@@ -75,10 +83,10 @@ export default class AddSubject extends Component {
       <React.Fragment>
         {this.state.subjects.map((subject, index) => (
           <div className="m-1 row" key={index}>
-            <p className="col-1"> {subject.id} </p>
-            <p className="col-4">{subject.name}</p>
-            <p className="col-3"> {subject.short}</p>
-            <p className="col-2"> {subject.department}</p>
+            <p className="col-2"> {subject.subjectid} </p>
+            <p className="col-4">{subject.subjectname}</p>
+            <p className="col-2"> {subject.subjectid}</p>
+            <p className="col-2"> {subject.departmentid}</p>
             <button
               className="btn btn-danger col-2"
               onClick={index => this.handleDelete(index)}
@@ -94,43 +102,48 @@ export default class AddSubject extends Component {
   render() {
     return (
       <React.Fragment>
+        <div style={{background:"#eee"}}>
+          <hr/>
+          <div name="addSubjectComponents" className="row m-2">
+            <input
+              className="col-4 form-control px-2 mx-2"
+              type="text"
+              placeholder="Subject Name"
+              value={this.state.temp.name}
+              onChange={evt => this.handleInput(evt, "name")}
+            />
+            <input
+              className="col-3 form-control  mx-2"
+              type="text"
+              placeholder="short form"
+              value={this.state.temp.short}
+              onChange={evt => this.handleInput(evt, "srt")}
+            />
+            <input
+              className="col-3 form-control mx-2"
+              type="text"
+              placeholder="Department"
+              value={this.state.temp.department}
+              onChange={evt => this.handleInput(evt, "dep")}
+            />
+            <button
+              name="addsSubject"
+              className="btn btn-primary btn-sm col-1 mx-2"
+              onClick={this.handleClick}
+            >
+              Add Subject
+            </button>
+          </div>
+          <hr/>
+        </div>
         <div className="m-1 row">
-          <p className="col-1 component border"> ID </p>
+          <p className="col-2 component border"> ID </p>
           <p className="col-4 component border">Subject Name</p>{" "}
-          <p className="col-3 component border"> Short Form</p>
+          <p className="col-2 component border"> Short Form</p>
           <p className="col-2 component border"> Department </p>
+          <p className="col-2 component border"> Action </p>
         </div>
         {this.renderSubjectList()}
-        <div name="addSubjectComponents" className="row m-2">
-          <input
-            className="col-4 form-control px-2 mx-2"
-            type="text"
-            placeholder="Subject Name"
-            value={this.state.temp.name}
-            onChange={evt => this.handleInput(evt, "name")}
-          />
-          <input
-            className="col-3 form-control  mx-2"
-            type="text"
-            placeholder="short form"
-            value={this.state.temp.short}
-            onChange={evt => this.handleInput(evt, "srt")}
-          />
-          <input
-            className="col-3 form-control mx-2"
-            type="text"
-            placeholder="Department"
-            value={this.state.temp.department}
-            onChange={evt => this.handleInput(evt, "dep")}
-          />
-          <button
-            name="addsSubject"
-            className="btn btn-primary btn-sm col-1 mx-2"
-            onClick={this.handleClick}
-          >
-            Add Subject
-          </button>
-        </div>
       </React.Fragment>
     );
   }
