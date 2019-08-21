@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { sendData } from "./helper";
 
 export default class AddTeacher extends Component {
@@ -6,14 +7,30 @@ export default class AddTeacher extends Component {
     super(props);
     this.state = {
       teachers: [],
-      temp: { id: 1, name: "", short: "", department: "ECE" }
+      temp: { id: 1, name: "", short: "", department: "" }
     };
 
     this.gullible = false;
   }
 
+  componentDidMount(){
+    this.refreshList()
+  }
+
+  refreshList = () => {
+    axios
+      .get("http://127.0.0.1:8000/teachers/")
+      .then(res => {
+        this.setState({
+          teachers : res.data
+        })
+      }
+      )
+      .catch(err => console.log(err));
+  };
+
   componentWillUnmount() {
-    sendData(this.state);
+    // sendData(this.state);
   }
 
   handleClick = () => {
@@ -28,7 +45,7 @@ export default class AddTeacher extends Component {
           id: this.state.temp.id + 1,
           name: "",
           short: "",
-          department: "ECE"
+          department: ""
         }
       });
     }
@@ -73,10 +90,11 @@ export default class AddTeacher extends Component {
       <React.Fragment>
         {this.state.teachers.map((teacher, index) => (
           <div className="m-1 row" key={index}>
-            <p className="col-1"> {teacher.id} </p>
-            <p className="col-4">{teacher.name}</p>
-            <p className="col-3"> {teacher.short}</p>
-            <p className="col-2"> {teacher.department}</p>
+            <p className="col-1"></p>
+            <p className="col-1"> {teacher.teacherid} </p>
+            <p className="col-4">{teacher.teachername}</p>
+            {/* <p className="col-3"> {teacher.short}</p> */}
+            <p className="col-3"> {teacher.departmentid}</p>
             <button
               className="btn btn-danger col-2"
               onClick={index => this.handleDelete(index)}
@@ -92,47 +110,53 @@ export default class AddTeacher extends Component {
   render() {
     return (
       <React.Fragment>
+        <div style={{background:"#eee"}}>
+          <hr/>        
+          <div name="addTeacherComponents" className="row m-2">
+            <input
+              className="col-4 form-control px-2 mx-2  ml-5"
+              type="text"
+              placeholder="teacher Name"
+              value={this.state.temp.name}
+              onChange={evt => this.handleInput(evt, "name")}
+            />
+            <input
+              className={
+                "col-3 form-control " + (this.gullible ? "bg-danger" : "") 
+              }
+              type="text"
+              placeholder="short form"
+              value={this.state.temp.short}
+              onChange={evt => this.changeShort(evt.target.value)}
+            />
+            <input
+              className="col-3 form-control mx-2"
+              type="text"
+              placeholder="Department"
+              value={this.state.temp.department}
+              onChange={evt => this.handleInput(evt, "dep")}
+            />
+            <button
+              name="addsTeacher"
+              className={
+                "btn btn-sm " + (this.gullible ? "btn-danger" : "btn-primary")
+              }
+              onClick={!this.gullible ? this.handleClick : undefined}
+            >
+              Add teacher
+            </button>
+          </div>
+          <hr/>
+        </div>
         <div className="m-1 row">
+          <p className="col-1"> </p>
           <p className="col-1 component border"> ID </p>
           <p className="col-4 component border">Teacher Name</p>{" "}
-          <p className="col-3 component border"> Short Form</p>
-          <p className="col-2 component border"> Department </p>
+          {/* <p className="col-3 component border"> Short Form</p> */}
+          <p className="col-3 component border"> Department </p>
+          <p className="col-2 component border"> Action </p>
         </div>
         {this.renderTeacherList()}
-        <div name="addTeacherComponents" className="row m-2">
-          <input
-            className="col-4 form-control px-2 mx-2"
-            type="text"
-            placeholder="teacher Name"
-            value={this.state.temp.name}
-            onChange={evt => this.handleInput(evt, "name")}
-          />
-          <input
-            className={
-              "col-3 form-control " + (this.gullible ? "bg-danger" : "") 
-            }
-            type="text"
-            placeholder="short form"
-            value={this.state.temp.short}
-            onChange={evt => this.changeShort(evt.target.value)}
-          />
-          <input
-            className="col-3 form-control mx-2"
-            type="text"
-            placeholder="Department"
-            value={this.state.temp.department}
-            onChange={evt => this.handleInput(evt, "dep")}
-          />
-          <button
-            name="addsTeacher"
-            className={
-              "btn btn-sm " + (this.gullible ? "btn-danger" : "btn-primary")
-            }
-            onClick={!this.gullible ? this.handleClick : undefined}
-          >
-            Add teacher
-          </button>
-        </div>
       </React.Fragment>
     );
   }
