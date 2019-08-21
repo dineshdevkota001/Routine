@@ -17,7 +17,7 @@ export default class Subject extends Component {
             placeholder="Subject Name"
             className="form-control mr-4"
             id="subjectName"
-            value={this.subject}
+            value={this.state.subject}
             onChange={evt => this.props.handleInput(evt.target.value)}
           />
         </div>
