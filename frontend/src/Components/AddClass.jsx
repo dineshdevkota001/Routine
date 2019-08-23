@@ -8,6 +8,7 @@ export default class AddClass extends Component {
       temp: { id: 1, name: "", short: "" }
     };
   }
+  
   handleClick = () => {
     if (this.state.temp.name && this.state.temp.short) {
       let previous = this.state.classes;
